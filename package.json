@@ -1,0 +1,16 @@
+{
+  "name": "latiao",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "1019118008@qq.com",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^3.1.0",
+    "puppeteer-extra": "^3.1.9",
+    "puppeteer-extra-plugin-flash": "^2.2.5"
+  }
+}
