@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer-extra');
 puppeteer.use(require('puppeteer-extra-plugin-flash')())
+const _ = require('lodash')
 
 const cookies = [
   {
@@ -256,29 +257,48 @@ const cookies = [
   }
 ];
 (async () => {
+  let arr = [];
   const browser = await puppeteer.launch(
-   { headless: false,
-    args: [
-      `--enable-plugins`,
-      `--enable-extensions`,
-      `--enable-user-scripts `,
-      `--enable-printing`,
-      `--enable-sync `,
-      `--auto-ssl-client-auth`
-  ]}
+    {
+      headless: false,
+      args: [
+        `--enable-plugins`,
+        `--enable-extensions`,
+        `--enable-user-scripts `,
+        `--enable-printing`,
+        `--enable-sync `,
+        `--auto-ssl-client-auth`
+      ]
+    }
   );
   const page = await browser.newPage();
-  console.log(111)
-  page.on(
-    'load', () => {
-      console.log(11111)
-      page.screenshot({ path: 'screenshot.png' });
-    }
-  )
-  await page.setViewport({ width: 1366, height: 768 });
-  await cookies.map((i) => {  page.setCookie(i)})
-  await page.goto('https://live.bilibili.com/462?session_id=041A5B1B-17F0-4914-B7C8-611C9B3A4F4B&visit_id=56n2qldfa8w0');
 
-  // other actions...
-  // await browser.close();
+  await page.setViewport({ width: 1366, height: 768 });
+  await cookies.map((i) => { page.setCookie(i) })
+  await page.goto('https://live.bilibili.com/1314?session_id=DC1BE073-F09A-7993-7C2A-D536E756B06D&visit_id=6dmjacc5bd80');
+  let isExits;
+  let link;
+  setInterval(async () => {
+    
+    isExits = await page.evaluate(() => 
+      document.querySelectorAll('.chat-draw-area-cntr')
+    );
+    link = await page.evaluate(() => 
+       document.querySelectorAll('.msg-content .link')
+    );
+    console.log(isExits, link,'=======================')
+    // if (isExits) {
+    //   console.log('isExits',isExits)
+    //   const a = await page.$('.chat-draw-area-cntr', (el) => {
+    //     console.log('click')
+    //     el.click()
+    //   }
+    //   )
+    // } else {
+    //   if (link) {
+    //     console.log('link',link)
+    //     await page.goto(link.href)
+    //   }
+    // }
+  }, 1000)
 })();

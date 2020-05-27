@@ -9,8 +9,11 @@
   "author": "1019118008@qq.com",
   "license": "ISC",
   "dependencies": {
+    "lodash": "^4.17.15",
     "puppeteer": "^3.1.0",
     "puppeteer-extra": "^3.1.9",
-    "puppeteer-extra-plugin-flash": "^2.2.5"
+    "puppeteer-extra-plugin-flash": "^2.2.5",
+    "puppeteer-extra-plugin-user-data-dir": "^2.2.4",
+    "puppeteer-extra-plugin-user-preferences": "^2.2.4"
   }
 }
